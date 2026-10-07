@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Максат & Гүлжаз | Үйлөнүү тою</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: #f7f1e8;
+      color: #4a3a32;
+      overflow-x: hidden;
+    }
+
+    /* Башкы экран */
+    .welcome {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background:
+        linear-gradient(rgba(70, 48, 38, .45), rgba(70, 48, 38, .45)),
+        url("cover.jpg") center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transition: 1s ease;
+    }
+
+    .welcome.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .welcome-box {
+      color: white;
+      padding: 35px 25px;
+    }
+
+    .welcome-box .small {
+      font-size: 18px;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    .welcome-box h1 {
+      font-size: 48px;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+
+    .welcome-box .date {
+      font-size: 20px;
+      margin-bottom: 35px;
+    }
+
+    .open-btn {
+      border: 1px solid rgba(255,255,255,.8);
+      background: rgba(255,255,255,.12);
+      color: white;
+      padding: 15px 45px;
+      border-radius: 50px;
+      font-size: 16px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+      transition: .3s;
+    }
+
+    .open-btn:hover {
+      background: white;
+      color: #5a4438;
+    }
+
+    /* Негизги сайт */
+    main {
+      max-width: 700px;
+      margin: auto;
+      background: #fffaf3;
+      min-height: 100vh;
+    }
+
+    section {
+      padding: 70px 25px;
+      text-align: center;
+    }
+
+    .ornament {
+      color: #a68763;
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+
+    .intro {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background:
+        linear-gradient(rgba(255,250,243,.82), rgba(255,250,243,.95)),
+        url("couple.jpg") center/cover;
+    }
+
+    .intro p {
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 500px;
+    }
+
+    .intro h2 {
+      font-size: 20px;
+      font-weight: normal;
+      letter-spacing: 3px;
+      color: #927354;
+      margin-bottom: 15px;
+    }
+
+    .names {
+      font-size: 54px;
+      font-weight: normal;
+      color: #6d5141;
+      line-height: 1.2;
+      margin-bottom: 25px;
+    }
+
+    .amp {
+      color: #b89570;
+      font-size: 35px;
+    }
+
+    .divider {
+      width: 90px;
+      height: 1px;
+      background: #b99b79;
+      margin: 25px auto;
+    }
+
+    h3 {
+      font-size: 30px;
+      font-weight: normal;
+      color: #6d5141;
+      margin-bottom: 20px;
+    }
+
+    .date-big {
+      font-size: 36px;
+      color: #8d6c4e;
+      margin: 15px 0;
+    }
+
+    .info {
+      background: #f2e8db;
+    }
+
+    .info-card {
+      margin: 20px auto;
+      padding: 25px;
+      background: rgba(255,255,255,.65);
+      border-radius: 18px;
+      max-width: 450px;
+    }
+
+    .info-card .icon {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .info-card h4 {
+      font-size: 20px;
+      font-weight: normal;
+      margin-bottom: 8px;
+    }
+
+    .info-card p {
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* Countdown */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      width: 75px;
+      padding: 13px 5px;
+      background: #f0e4d5;
+      border-radius: 12px;
+    }
+
+    .time-box strong {
+      display: block;
+      font-size: 25px;
+      color: #715543;
+    }
+
+    .time-box span {
+      font-size: 12px;
+      color: #8d7664;
+    }
+
+    /* Map */
+    .map-btn {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      background: #80634e;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 30px;
+      transition: .3s;
+    }
+
+    .map-btn:hover {
+      background: #5e4637;
+    }
+
+    /* Той ээлери */
+    .owners {
+      font-size: 20px;
+      line-height: 2;
+    }
+
+    .owners span {
+      display: block;
+    }
+
+    footer {
+      padding: 45px 20px;
+      text-align: center;
+      background: #4f3b31;
+      color: #f8eee2;
+    }
+
+    footer .heart {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    footer p {
+      line-height: 1.7;
+    }
+
+    /* Музыка */
+    .music-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: #80634e;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(0,0,0,.2);
+    }
+
+    @media (max-width: 500px) {
+      .welcome-box h1 {
+        font-size: 40px;
+      }
+
+      .names {
+        font-size: 43px;
+      }
+
+      section {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Баштапкы экран -->
+  <div class="welcome" id="welcome">
+    <div class="welcome-box">
+
+      <div class="small">ҮЙЛӨНҮҮ ТОЮНА</div>
+
+      <h1>Максат & Гүлжаз</h1>
+
+      <div class="date">06 • 11 • 2026</div>
+
+      <button class="open-btn" onclick="openInvitation()">
+        АЧУУ
+      </button>
+
+    </div>
+  </div>
+
+
+  <main>
+
+    <!-- Башкы бөлүк -->
+    <section class="intro">
+
+      <div class="ornament">❦</div>
+
+      <h2>КЫМБАТТУУ КОНАКТАР!</h2>
+
+      <div class="names">
+        Максат
+        <div class="amp">&</div>
+        Гүлжаз
+      </div>
+
+      <div class="divider"></div>
+
+      <p>
+        Сиздерди биздин жашообуздагы эң маанилүү
+        жана бактылуу күнгө арналган үйлөнүү тоюбузга
+        чын жүрөктөн чакырабыз!
+      </p>
+
+    </section>
+
+
+    <!-- Дата -->
+    <section>
+
+      <div class="ornament">❦</div>
+
+      <h3>ТОЙУБУЗДУН КҮНҮ</h3>
+
+      <div class="date-big">
+        6-ноябрь<br>
+        2026-жыл
+      </div>
+
+      <div class="divider"></div>
+
+      <p>
+        Сиздер менен бирге бул өзгөчө күндү
+        өткөрүүгө кубанычта болобуз.
+      </p>
+
+      <!-- Таймер -->
+      <div class="countdown">
+
+        <div class="time-box">
+          <strong id="days">0</strong>
+          <span>КҮН</span>
+        </div>
+
+        <div class="time-box">
+          <strong id="hours">0</strong>
+          <span>СААТ</span>
+        </div>
+
+        <div class="time-box">
+          <strong id="minutes">0</strong>
+          <span>МҮНӨТ</span>
+        </div>
+
+        <div class="time-box">
+          <strong id="seconds">0</strong>
+          <span>СЕКУНД</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Маалымат -->
+    <section class="info">
+
+      <div class="ornament">❦</div>
+
+      <h3>ТОЙДУН МААЛЫМАТЫ</h3>
+
+      <div class="info-card">
+        <div class="icon">📅</div>
+        <h4>КҮНҮ</h4>
+        <p>6-ноябрь, 2026-жыл</p>
+      </div>
+
+      <div class="info-card">
+        <div class="icon">🕓</div>
+        <h4>БАШТАЛУУ УБАКТЫСЫ</h4>
+        <p>Саат 16:00</p>
+      </div>
+
+      <div class="info-card">
+        <div class="icon">📍</div>
+        <h4>ӨТҮҮЧҮ ЖЕРИ</h4>
+        <p>Тунук тойкана</p>
+
+        <!-- Google Maps шилтемесин кийин ушул жерге койсо болот -->
+        <a
+          class="map-btn"
+          href="https://www.google.com/maps/search/?api=1&query=Тунук+тойкана"
+          target="_blank">
+          📍 КАРТАДАН КӨРҮҮ
+        </a>
+      </div>
+
+    </section>
+
+
+    <!-- Той ээлери -->
+    <section>
+
+      <div class="ornament">❦</div>
+
+      <h3>ТОЙ ЭЭЛЕРИ</h3>
+
+      <div class="divider"></div>
+
+      <div class="owners">
+        <span>Таалайбек</span>
+        <span>Батый</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <p>
+        Сиздердин келишиңиздер биз үчүн
+        чоң сыймык жана кубаныч!
+      </p>
+
+    </section>
+
+
+    <footer>
+
+      <div class="heart">♡</div>
+
+      <p>
+        Урматтоо менен,<br>
+        <strong>Максат & Гүлжаз</strong>
+      </p>
+
+      <br>
+
+      <p>
+        6 • 11 • 2026
+      </p>
+
+    </footer>
+
+  </main>
+
+
+  <!-- Музыка -->
+  <audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
+    ♪
+  </button>
+
+
+  <script>
+
+    // Чакыруу ачуу
+    function openInvitation() {
+
+      document.getElementById("welcome")
+        .classList.add("hide");
+
+      const music = document.getElementById("music");
+
+      music.play().catch(() => {});
+
+    }
+
+
+    // Музыка
+    let playing = false;
+
+    function toggleMusic() {
+
+      const music = document.getElementById("music");
+      const btn = document.getElementById("musicBtn");
+
+      if (playing) {
+
+        music.pause();
+        btn.innerHTML = "♪";
+        playing = false;
+
+      } else {
+
+        music.play();
+        btn.innerHTML = "❚❚";
+        playing = true;
+
+      }
+    }
+
+
+    // Таймер
+    const weddingDate =
+      new Date("November 6, 2026 16:00:00").getTime();
+
+
+    function updateCountdown() {
+
+      const now = new Date().getTime();
+
+      const distance = weddingDate - now;
+
+
+      if (distance <= 0) {
+
+        document.getElementById("days").innerHTML = "0";
+        document.getElementById("hours").innerHTML = "0";
+        document.getElementById("minutes").innerHTML = "0";
+        document.getElementById("seconds").innerHTML = "0";
+
+        return;
+      }
+
+
+      const days =
+        Math.floor(distance / (1000 * 60 * 60 * 24));
+
+      const hours =
+        Math.floor(
+          (distance % (1000 * 60 * 60 * 24))
+          / (1000 * 60 * 60)
+        );
+
+      const minutes =
+        Math.floor(
+          (distance % (1000 * 60 * 60))
+          / (1000 * 60)
+        );
+
+      const seconds =
+        Math.floor(
+          (distance % (1000 * 60))
+          / 1000
+        );
+
+
+      document.getElementById("days").innerHTML = days;
+      document.getElementById("hours").innerHTML = hours;
+      document.getElementById("minutes").innerHTML = minutes;
+      document.getElementById("seconds").innerHTML = seconds;
+    }
+
+
+    updateCountdown();
+
+    setInterval(updateCountdown, 1000);
+
+  </script>
+
+</body>
+</html>
+:::
